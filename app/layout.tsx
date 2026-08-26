@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://drift.city"),
+  metadataBase: new URL("https://drift-meet-people.howiechen-hc.chatgpt.site"),
   title: {
     default: "drift — Meet people, not profiles.",
     template: "%s — drift",
