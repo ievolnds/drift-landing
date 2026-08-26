@@ -330,7 +330,8 @@ export function LandingPage() {
         <DriftMark dark />
         <p>Meet people, not profiles.</p>
         <div>
-          <a href="mailto:hello@driftapp.cc">Contact</a>
+          <a href="https://ievolnds.github.io/drift-legal/privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
+          <a href="mailto:howiechen.hc@gmail.com">Contact</a>
           <span>© 2026 drift</span>
         </div>
       </footer>
