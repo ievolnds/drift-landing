@@ -31,6 +31,9 @@ Maybe you’re not tired of meeting people. Maybe you’re tired of turning peop
 **Headline**  
 Less swiping. More noticing.
 
+**On-image hook**
+Less swiping. More noticing.
+
 **Description**  
 Meet people, not profiles.
 
@@ -51,6 +54,9 @@ Download
 Some people aren’t hard to know. They’re just tired of performing. On drift, a photo from right now can say more than a perfect profile ever could.
 
 **Headline**  
+You don’t have to perform here.
+
+**On-image hook**
 You don’t have to perform here.
 
 **Description**  
@@ -75,6 +81,9 @@ The city feels different when someone notices the same small things you do. See 
 **Headline**  
 Someone nearby noticed it too.
 
+**On-image hook**
+Someone nearby noticed it too.
+
 **Description**  
 See your city differently.
 
@@ -97,6 +106,9 @@ A little curiosity. Five messages each. Then the conversation opens only if you 
 **Headline**  
 Five messages. Two yeses.
 
+**On-image hook**
+Five messages. Two yeses.
+
 **Description**  
 Keep talking when it’s mutual.
 
@@ -110,9 +122,9 @@ Download
 ## Execution notes
 
 - Run each concept as its own ad so the emotional hook can be measured cleanly.
-- Keep the generated images free of headline overlays for the first test. Meta’s native headline stays readable across placements, and the photography retains drift’s restraint.
+- Each 4:5 creative carries one short hook, the drift wordmark, and a restrained download cue. The ad must communicate its emotional promise even when the viewer never opens the caption.
+- Keep body copy out of the image. The image earns attention; Meta’s primary text explains the product after the pause.
 - Use the landing page for cold traffic. Send warm retargeting traffic directly to the relevant store only after attribution and audience size are sufficient.
 - Do not lead with feature lists. Lead with recognition, then let the landing page explain the five-message and mutual-unlock mechanics.
 - Avoid broad claims such as “find your person” or “the safest dating app.” drift’s credibility comes from precise product behavior, not promises it cannot guarantee.
 - When the Meta Pixel is added, connect the existing `store_click` event hook on every store button to the final analytics event.
-

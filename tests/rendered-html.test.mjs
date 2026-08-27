@@ -3,42 +3,23 @@ import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+  return readFile(new URL("../out/index.html", import.meta.url), "utf8");
 }
 
-test("server-renders the complete drift landing page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
+test("renders the complete public drift landing page", async () => {
+  const html = await render();
   assert.match(html, /<title>drift — Meet people, not profiles\.<\/title>/i);
   assert.match(html, /A quieter social app for your city/);
-  assert.match(html, /You are more interesting/);
-  assert.match(html, /You each get five messages/i);
-  assert.match(html, /No follower counts/);
+  assert.match(html, /Most social apps ask you to become a profile/);
+  assert.match(html, /Five messages each/);
+  assert.match(html, /No popularity contest/);
   assert.match(html, /apps\.apple\.com\/us\/app\/drift-dting\/id6788133398/);
   assert.match(html, /play\.google\.com\/store\/apps\/details\?id=com\.howard\.drift/);
-  assert.match(html, /og-drift\.png/);
+  assert.match(html, /\/drift-landing\/scenes\/station\.webp/);
+  assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /[\u3400-\u9fff]/);
   assert.doesNotMatch(html, /Your site is taking shape|SkeletonPreview/);
+  assert.doesNotMatch(html, /phone--|A preview of the drift/i);
 });
 
 test("ships mobile, motion, attribution, and campaign assets", async () => {
@@ -53,7 +34,7 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   assert.match(landing, /prefers-reduced-motion/);
   assert.match(landing, /drift:store-click/);
   assert.match(landing, /dataLayer\?\.push/);
-  assert.match(css, /@media \(max-width: 800px\)/);
+  assert.match(css, /@media \(max-width: 820px\)/);
   assert.match(css, /\.mobile-download/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(campaign, /Dating-app fatigue/);
@@ -67,5 +48,5 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
     "ad-04-mutual-choice.png",
   ]);
 
-  await access(new URL("../public/og-drift.png", import.meta.url));
+  await access(new URL("../public/og.png", import.meta.url));
 });

@@ -18,7 +18,7 @@ npm run lint
 npm test
 ```
 
-`npm test` runs a production vinext build and checks the rendered landing page, store links, mobile treatment, reduced-motion support, event hook, and campaign asset set.
+`npm test` runs the public static build and checks the rendered landing page, store links, mobile treatment, reduced-motion support, event hook, and campaign asset set.
 
 ## Campaign assets
 
@@ -26,4 +26,8 @@ The four Meta-ready 4:5 creatives are in `public/ads/`. Final English copy, audi
 
 ## Production
 
-This project is deployed with OpenAI Sites. Site identity and optional service bindings are declared in `.openai/hosting.json`.
+The public site is deployed from the `gh-pages` branch of the public `ievolnds/drift-landing` repository:
+
+`https://ievolnds.github.io/drift-landing/`
+
+`vercel.json` is retained as an optional path for a future Vercel custom-domain deployment.
