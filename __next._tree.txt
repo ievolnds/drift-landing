@@ -1,2 +1,2 @@
-:HL["/drift-landing/_next/static/css/95706395650973d7.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"F0joc3yFT7N9q2oe9oOr7"}
+:HL["/drift-landing/_next/static/css/576b20565476140e.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"9ZBaucVp2DgrSgS6o_lqc"}
