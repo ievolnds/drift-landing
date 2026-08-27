@@ -22,26 +22,26 @@ function trackStoreClick(store: Store, placement: string) {
 function StoreLink({
   store,
   placement,
-  quiet = false,
 }: {
   store: Store;
   placement: string;
-  quiet?: boolean;
 }) {
   const apple = store === "apple";
+  const label = apple ? "Download on the App Store" : "Get it on Google Play";
 
   return (
     <a
-      className={`store-link${quiet ? " store-link--quiet" : ""}`}
+      className={`store-badge store-badge--${store}`}
       href={apple ? APP_STORE_URL : PLAY_STORE_URL}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackStoreClick(store, placement)}
-      aria-label={apple ? "Download drift for iPhone" : "Download drift for Android"}
+      aria-label={label}
     >
-      <span>{apple ? "Download on the" : "Get it on"}</span>
-      <b>{apple ? "App Store" : "Google Play"}</b>
-      <i aria-hidden="true">↗</i>
+      <img
+        src={`${ASSET_PREFIX}/store-badges/${apple ? "app-store.svg" : "google-play.png"}`}
+        alt={label}
+      />
     </a>
   );
 }
@@ -140,12 +140,9 @@ export function LandingPage() {
         <a href="#what-is-drift" className="nav__about">What is drift?</a>
         <a
           className="nav__cta"
-          href={APP_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackStoreClick("apple", "nav")}
+          href="#download"
         >
-          Get drift <span>↗</span>
+          Get drift <span>↓</span>
         </a>
       </nav>
 
@@ -157,14 +154,14 @@ export function LandingPage() {
         />
         <div className="hero__veil" />
         <div className="hero__copy">
-          <p className="eyebrow" data-reveal>A quieter social app for your city</p>
+          <p className="eyebrow" data-reveal>A quieter social app for people with taste</p>
           <h1 data-reveal>
             Meet people<br />
-            <em>before</em> profiles.
+            <em>through taste.</em>
           </h1>
           <p className="hero__body" data-reveal>
-            Share one real moment. Notice someone nearby. Let a conversation begin
-            without having to sell yourself first.
+            Find your kind of people through the songs, places, photographs, and
+            small details that make a city feel like yours.
           </p>
           <div className="store-row store-row--hero">
             <StoreLink store="apple" placement="hero" />
@@ -179,22 +176,22 @@ export function LandingPage() {
       <section className="statement" id="what-is-drift">
         <div className="statement__index">01 — THE IDEA</div>
         <p className="statement__lead" data-reveal>
-          Most social apps ask you to become a profile.
+          People with taste rarely need to announce it.
           <br />
-          <em>drift asks what you noticed today.</em>
+          <em>You recognize it in what they notice.</em>
         </p>
         <div className="statement__aside" data-reveal>
-          <span>Less presentation.</span>
-          <span>More presence.</span>
+          <span>Same city.</span>
+          <span>Similar sensibility.</span>
         </div>
       </section>
 
       <Scene
         image={`${ASSET_PREFIX}/scenes/rain-cafe.webp`}
         alt="A thoughtful person sits by a rain-covered café window"
-        eyebrow="A real moment comes first"
-        title={<>No perfect profile.<br />Just something true.</>}
-        copy="Post a photo from right now—the rainy window, the song still playing, the walk home you wanted to remember. A small moment is enough to be seen."
+        eyebrow="The daily feed"
+        title={<>Taste appears in<br />what you notice.</>}
+        copy="Take a photo inside drift—something from today, not an old highlight reel. See your city through people whose eye makes you pause."
         align="left"
         position="58% center"
       />
@@ -202,46 +199,46 @@ export function LandingPage() {
       <section className="interlude interlude--dark">
         <div className="interlude__label">HOW IT STARTS</div>
         <div className="interlude__words" data-reveal>
-          <span>Someone posts.</span>
-          <span>Something resonates.</span>
-          <em>A hello already has somewhere to begin.</em>
+          <span>A photograph.</span>
+          <span>A song. A place.</span>
+          <em>One small sign of taste is enough to begin.</em>
         </div>
       </section>
 
       <Scene
         image={`${ASSET_PREFIX}/scenes/after-rain.webp`}
         alt="Two people notice the same city light after rain"
-        eyebrow="The city is part of the story"
-        title={<>Someone nearby<br />noticed it too.</>}
-        copy="See honest moments from people living in the same city. Distance stays approximate. The first connection is what caught your eye—not a résumé."
+        eyebrow="Now · one hour"
+        title={<>A song. A place.<br />A passing thought.</>}
+        copy="Share what you're listening to, where the evening took you, or a short note. It disappears in an hour—just enough time to find someone on the same wavelength."
         align="right"
         position="center center"
       />
 
       <section className="details">
         <div className="details__intro" data-reveal>
-          <p className="eyebrow">Quiet by design</p>
-          <h2>Attention should<br />feel like something.</h2>
+          <p className="eyebrow">Recognize your people</p>
+          <h2>Chemistry begins<br />with taste.</h2>
           <p>
-            drift keeps the noise low so curiosity can stay human. There is less to
-            collect, less to perform, and more reason to mean what you send.
+            Before a long conversation, there is usually one small detail that makes
+            you wonder who noticed it too.
           </p>
         </div>
         <div className="details__list">
           <article data-reveal>
             <span>01</span>
-            <h3>Real-time posts</h3>
-            <p>What is happening now, not a camera roll built to impress.</p>
+            <h3>Camera-only posts</h3>
+            <p>Photographs taken today. No old archive polished for approval.</p>
           </article>
           <article data-reveal>
             <span>02</span>
-            <h3>Approximate distance</h3>
-            <p>Close enough to share a city. Private enough to keep your place.</p>
+            <h3>Resonate</h3>
+            <p>A quiet way to say: I noticed that too.</p>
           </article>
           <article data-reveal>
             <span>03</span>
-            <h3>No popularity contest</h3>
-            <p>No follower counts, no like rankings, no endless queue to win.</p>
+            <h3>Say hi</h3>
+            <p>Begin with the moment that caught your attention, not a cold opening line.</p>
           </article>
         </div>
       </section>
@@ -249,9 +246,9 @@ export function LandingPage() {
       <Scene
         image={`${ASSET_PREFIX}/scenes/bookstore.webp`}
         alt="Two strangers exchange a glance in an independent bookstore"
-        eyebrow="A slower way into conversation"
-        title={<>Five messages each.<br />Then two yeses.</>}
-        copy="You each have five messages to find out whether the feeling is real. The conversation opens only when both people choose to keep going."
+        eyebrow="Encounter · once a day"
+        title={<>A postcard before<br />a profile.</>}
+        copy="Make one postcard without knowing who will receive it. drift brings two people together; each decides privately. When both say yes, the conversation opens fully."
         align="left"
         position="center center"
       />
@@ -265,18 +262,17 @@ export function LandingPage() {
           />
         </div>
         <div className="human-grid__copy" data-reveal>
-          <p className="eyebrow">For the hours in between</p>
-          <h2>Not every connection needs an opening line.</h2>
+          <p className="eyebrow">Conversation, without the rush</p>
+          <h2>Five messages each. Then two yeses.</h2>
           <p>
-            Sometimes it begins with the same late train. The same weather. The same
-            oddly beautiful laundromat at 11:40 p.m. drift gives those moments somewhere
-            to go.
+            You each get five messages to see whether the feeling has somewhere to go.
+            Unlimited conversation begins only when both people choose it.
           </p>
-          <blockquote>“For people who still notice people.”</blockquote>
+          <blockquote>“Taste creates curiosity. Mutual choice lets it continue.”</blockquote>
         </div>
       </section>
 
-      <section className="final-scene">
+      <section className="final-scene" id="download">
         <img
           className="final-scene__image"
           src={`${ASSET_PREFIX}/scenes/cinema.webp`}
@@ -287,8 +283,8 @@ export function LandingPage() {
         <div className="final-scene__copy" data-reveal>
           <Brand />
           <p className="eyebrow">Available now</p>
-          <h2>Your city is full<br />of almost hellos.</h2>
-          <p>Notice one.</p>
+          <h2>Your city already has<br />your kind of people.</h2>
+          <p>You just have to notice each other.</p>
           <div className="store-row store-row--final">
             <StoreLink store="apple" placement="final" />
             <StoreLink store="google" placement="final" />
@@ -304,19 +300,12 @@ export function LandingPage() {
           <a href="mailto:howiechen.hc@gmail.com">Contact</a>
           <span>© {new Date().getFullYear()} drift</span>
         </div>
+        <small className="footer__legal">
+          Apple and the Apple logo are trademarks of Apple Inc., registered in the
+          U.S. and other countries. Google Play and the Google Play logo are trademarks
+          of Google LLC.
+        </small>
       </footer>
-
-      <a
-        className="mobile-download"
-        href={APP_STORE_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => trackStoreClick("apple", "mobile_sticky")}
-      >
-        <span><Brand dark /></span>
-        <b>App Store</b>
-        <i aria-hidden="true">↗</i>
-      </a>
     </main>
   );
 }

@@ -9,13 +9,18 @@ async function render() {
 test("renders the complete public drift landing page", async () => {
   const html = await render();
   assert.match(html, /<title>drift — Meet people, not profiles\.<\/title>/i);
-  assert.match(html, /A quieter social app for your city/);
-  assert.match(html, /Most social apps ask you to become a profile/);
+  assert.match(html, /A quieter social app for people with taste/);
+  assert.match(html, /People with taste rarely need to announce it/);
+  assert.match(html, /Now · one hour/);
+  assert.match(html, /Encounter · once a day/);
+  assert.match(html, /A postcard before/);
   assert.match(html, /Five messages each/);
-  assert.match(html, /No popularity contest/);
+  assert.match(html, /Resonate/);
   assert.match(html, /apps\.apple\.com\/us\/app\/drift-dting\/id6788133398/);
   assert.match(html, /play\.google\.com\/store\/apps\/details\?id=com\.howard\.drift/);
   assert.match(html, /\/drift-landing\/scenes\/station\.webp/);
+  assert.match(html, /\/drift-landing\/store-badges\/app-store\.svg/);
+  assert.match(html, /\/drift-landing\/store-badges\/google-play\.png/);
   assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /[\u3400-\u9fff]/);
   assert.doesNotMatch(html, /Your site is taking shape|SkeletonPreview/);
@@ -36,12 +41,13 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   assert.match(landing, /drift:store-click/);
   assert.match(landing, /dataLayer\?\.push/);
   assert.match(landing, /store-row store-row--hero/);
-  assert.match(landing, /Download on the/);
-  assert.match(landing, /App Store/);
-  assert.match(landing, /Get it on/);
-  assert.match(landing, /Google Play/);
+  assert.match(landing, /Download on the App Store/);
+  assert.match(landing, /Get it on Google Play/);
+  assert.doesNotMatch(landing, /mobile-download/);
   assert.match(css, /@media \(max-width: 820px\)/);
-  assert.match(css, /\.mobile-download/);
+  assert.match(css, /\.store-badge--apple/);
+  assert.match(css, /\.store-badge--google/);
+  assert.doesNotMatch(css, /\.mobile-download/);
   assert.match(css, /\.motion-ready \[data-reveal\]/);
   assert.doesNotMatch(css, /\.js \[data-reveal\]/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
@@ -57,5 +63,7 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   ]);
 
   await access(new URL("../public/og.png", import.meta.url));
+  await access(new URL("../public/store-badges/app-store.svg", import.meta.url));
+  await access(new URL("../public/store-badges/google-play.png", import.meta.url));
   await access(new URL("../out/.nojekyll", import.meta.url));
 });
