@@ -49,4 +49,5 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   ]);
 
   await access(new URL("../public/og.png", import.meta.url));
+  await access(new URL("../out/.nojekyll", import.meta.url));
 });
