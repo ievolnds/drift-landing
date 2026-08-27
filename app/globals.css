@@ -58,7 +58,7 @@ img {
   transform: translateY(0);
 }
 
-.js [data-reveal] {
+.motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(34px);
   transition:
@@ -66,8 +66,8 @@ img {
     transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.js [data-reveal].is-visible,
-.js .is-visible [data-reveal] {
+.motion-ready [data-reveal].is-visible,
+.motion-ready .is-visible [data-reveal] {
   opacity: 1;
   transform: translateY(0);
 }
@@ -223,14 +223,18 @@ img {
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   min-width: 194px;
-  padding: 13px 16px 12px;
-  color: var(--cream);
-  border: 1px solid rgba(255, 255, 255, 0.56);
+  min-height: 58px;
+  padding: 12px 16px 11px;
+  color: var(--ink);
+  background: rgba(243, 237, 227, 0.96);
+  border: 1px solid rgba(243, 237, 227, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   transition: color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
 .store-link span {
-  font-size: 9px;
+  font-size: 8px;
+  font-weight: 650;
   letter-spacing: 0.13em;
   line-height: 1.1;
   text-transform: uppercase;
@@ -239,8 +243,8 @@ img {
 .store-link b {
   grid-row: 2;
   font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -254,7 +258,7 @@ img {
 
 .store-link:hover {
   color: var(--ink);
-  background: var(--cream);
+  background: #fffaf2;
   transform: translateY(-2px);
 }
 
@@ -703,11 +707,12 @@ img {
   .store-link {
     min-width: 0;
     width: calc(50% - 4px);
-    padding: 11px 12px 10px;
+    min-height: 57px;
+    padding: 11px 12px 9px;
   }
 
   .store-link b {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .hero__scroll {
@@ -866,12 +871,13 @@ img {
     position: fixed;
     z-index: 40;
     right: 12px;
-    bottom: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
     left: 12px;
     display: grid;
     grid-template-columns: 1fr auto auto;
     align-items: center;
     padding: 12px 16px;
+    min-height: 56px;
     color: var(--ink);
     background: rgba(243, 237, 227, 0.95);
     border: 1px solid rgba(16, 16, 15, 0.12);

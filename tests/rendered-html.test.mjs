@@ -31,11 +31,19 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   ]);
 
   assert.match(landing, /IntersectionObserver/);
+  assert.match(landing, /typeof window\.IntersectionObserver === "undefined"/);
   assert.match(landing, /prefers-reduced-motion/);
   assert.match(landing, /drift:store-click/);
   assert.match(landing, /dataLayer\?\.push/);
+  assert.match(landing, /store-row store-row--hero/);
+  assert.match(landing, /Download on the/);
+  assert.match(landing, /App Store/);
+  assert.match(landing, /Get it on/);
+  assert.match(landing, /Google Play/);
   assert.match(css, /@media \(max-width: 820px\)/);
   assert.match(css, /\.mobile-download/);
+  assert.match(css, /\.motion-ready \[data-reveal\]/);
+  assert.doesNotMatch(css, /\.js \[data-reveal\]/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(campaign, /Dating-app fatigue/);
   assert.match(campaign, /Quiet, creative people/);

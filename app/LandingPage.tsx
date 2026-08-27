@@ -39,8 +39,8 @@ function StoreLink({
       onClick={() => trackStoreClick(store, placement)}
       aria-label={apple ? "Download drift for iPhone" : "Download drift for Android"}
     >
-      <span>{apple ? "iPhone" : "Android"}</span>
-      <b>Download free</b>
+      <span>{apple ? "Download on the" : "Get it on"}</span>
+      <b>{apple ? "App Store" : "Google Play"}</b>
       <i aria-hidden="true">↗</i>
     </a>
   );
@@ -93,13 +93,12 @@ function Scene({
 
 export function LandingPage() {
   useEffect(() => {
-    document.documentElement.classList.add("js");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const revealNodes = Array.from(
       document.querySelectorAll<HTMLElement>("[data-reveal], [data-scene]"),
     );
 
-    if (reducedMotion) {
+    if (reducedMotion || typeof window.IntersectionObserver === "undefined") {
       revealNodes.forEach((node) => node.classList.add("is-visible"));
       return;
     }
@@ -113,6 +112,7 @@ export function LandingPage() {
       { threshold: 0.12, rootMargin: "0px 0px -8%" },
     );
 
+    document.documentElement.classList.add("motion-ready");
     revealNodes.forEach((node) => observer.observe(node));
 
     let frame = 0;
@@ -128,6 +128,7 @@ export function LandingPage() {
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
+      document.documentElement.classList.remove("motion-ready");
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
@@ -165,7 +166,7 @@ export function LandingPage() {
             Share one real moment. Notice someone nearby. Let a conversation begin
             without having to sell yourself first.
           </p>
-          <div className="store-row" data-reveal>
+          <div className="store-row store-row--hero">
             <StoreLink store="apple" placement="hero" />
             <StoreLink store="google" placement="hero" />
           </div>
@@ -288,7 +289,7 @@ export function LandingPage() {
           <p className="eyebrow">Available now</p>
           <h2>Your city is full<br />of almost hellos.</h2>
           <p>Notice one.</p>
-          <div className="store-row">
+          <div className="store-row store-row--final">
             <StoreLink store="apple" placement="final" />
             <StoreLink store="google" placement="final" />
           </div>
@@ -313,7 +314,7 @@ export function LandingPage() {
         onClick={() => trackStoreClick("apple", "mobile_sticky")}
       >
         <span><Brand dark /></span>
-        <b>Download free</b>
+        <b>App Store</b>
         <i aria-hidden="true">↗</i>
       </a>
     </main>
