@@ -22,16 +22,20 @@ test("renders the complete public drift landing page", async () => {
   assert.match(html, /\/drift-landing\/store-badges\/app-store\.svg/);
   assert.match(html, /\/drift-landing\/store-badges\/google-play\.png/);
   assert.match(html, /og\.png/);
+  assert.match(html, /1807919130381082/);
+  assert.match(html, /ev=PageView/);
   assert.doesNotMatch(html, /[\u3400-\u9fff]/);
   assert.doesNotMatch(html, /Your site is taking shape|SkeletonPreview/);
   assert.doesNotMatch(html, /phone--|A preview of the drift/i);
 });
 
 test("ships mobile, motion, attribution, and campaign assets", async () => {
-  const [landing, css, campaign, adFiles] = await Promise.all([
+  const [landing, pixel, css, campaign, readme, adFiles] = await Promise.all([
     readFile(new URL("../app/LandingPage.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/MetaPixel.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../AD_CAMPAIGNS.md", import.meta.url), "utf8"),
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
     readdir(new URL("../public/ads/", import.meta.url)),
   ]);
 
@@ -40,6 +44,11 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   assert.match(landing, /prefers-reduced-motion/);
   assert.match(landing, /drift:store-click/);
   assert.match(landing, /dataLayer\?\.push/);
+  assert.match(landing, /fbq\?\.\("trackCustom", "StoreClick", detail\)/);
+  assert.match(landing, /utm_campaign/);
+  assert.match(pixel, /1807919130381082/);
+  assert.match(pixel, /connect\.facebook\.net\/en_US\/fbevents\.js/);
+  assert.match(pixel, /fbq\('track','PageView'\)/);
   assert.match(landing, /store-row store-row--hero/);
   assert.match(landing, /Download on the App Store/);
   assert.match(landing, /Get it on Google Play/);
@@ -55,6 +64,9 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
   assert.match(campaign, /Quiet, creative people/);
   assert.match(campaign, /City discovery/);
   assert.match(campaign, /Mutual, low-pressure connection/);
+  assert.match(campaign, /\$10\/day/);
+  assert.doesNotMatch(campaign, /approximate distance|Someone nearby|happening nearby/i);
+  assert.match(readme, /Meta Pixel `1807919130381082`/);
   assert.deepEqual(adFiles.sort(), [
     "ad-01-less-swiping.png",
     "ad-02-no-performance.png",

@@ -11,11 +11,11 @@ The product advantages to repeat consistently are:
 1. **A real moment comes before a profile.** Camera-first, limited posting makes the feed feel current rather than curated.
 2. **Every hello has context.** A conversation begins from something a person actually noticed.
 3. **Interest must be mutual.** Five messages each and a two-person unlock create a natural, low-pressure decision point.
-4. **The city is part of the product.** Time of day, approximate distance, Now, and postcards make connection feel local and serendipitous.
+4. **The city is part of the product.** Time of day, Now, Encounter, and postcards make connection feel local and serendipitous.
 
-For the first US test, concentrate spend in one dense city cluster instead of targeting the entire country. The recommended pilot is Chicago, beginning with the connected North Side neighborhoods where the intended audience already moves between cafés, music venues, bookstores, universities, and transit. A practical estimated test is **$80/day for 14 days ($1,120 total)**: four creative concepts at $20/day each, then move 70% of daily spend to the strongest two after each has enough delivery to compare. Treat these numbers as a starting assumption, not a forecast.
+For the first US test, concentrate spend in one dense city cluster instead of targeting the entire country. The recommended pilot is Chicago, beginning with the connected North Side neighborhoods where the intended audience already moves between cafés, music venues, bookstores, universities, and transit. The working cap is **$10/day total**. Run one concept at a time long enough to judge qualified store traffic, then rotate the creative instead of splitting this small budget into several underfunded ad sets.
 
-Optimize first for **qualified App Store / Google Play clicks**, then for verified installs once app attribution is connected. A high landing-page click-through rate is not a win if store visits or installs do not follow.
+Optimize for **qualified App Store / Google Play clicks from the landing page**. Cross-check daily first-time downloads in App Store Connect and Google Play Console, but keep Meta’s funnel website-first; it does not depend on an app campaign or the Meta App SDK. A high ad click-through rate is not a win if `StoreClick` events do not follow.
 
 ---
 
@@ -76,13 +76,13 @@ Download
 **Image:** `public/ads/ad-03-same-city.png`
 
 **Primary text**  
-The city feels different when someone notices the same small things you do. See what’s happening nearby, and let one honest moment become a conversation.
+The city feels different when someone notices the same small things you do. See it through people with a sensibility like yours, and let one honest moment become a conversation.
 
 **Headline**  
-Someone nearby noticed it too.
+Someone in your city noticed it too.
 
 **On-image hook**
-Someone nearby noticed it too.
+Someone in your city noticed it too.
 
 **Description**  
 See your city differently.
@@ -124,7 +124,7 @@ Download
 - Run each concept as its own ad so the emotional hook can be measured cleanly.
 - Each 4:5 creative carries one short hook, the drift wordmark, and a restrained download cue. The ad must communicate its emotional promise even when the viewer never opens the caption.
 - Keep body copy out of the image. The image earns attention; Meta’s primary text explains the product after the pause.
-- Use the landing page for cold traffic. Send warm retargeting traffic directly to the relevant store only after attribution and audience size are sufficient.
+- Use the landing page for all Meta traffic, then let visitors choose App Store or Google Play.
 - Do not lead with feature lists. Lead with recognition, then let the landing page explain the five-message and mutual-unlock mechanics.
 - Avoid broad claims such as “find your person” or “the safest dating app.” drift’s credibility comes from precise product behavior, not promises it cannot guarantee.
-- When the Meta Pixel is added, connect the existing `store_click` event hook on every store button to the final analytics event.
+- Meta Pixel `1807919130381082` sends `PageView` and custom `StoreClick` events. Keep UTM fields on every ad URL so store intent can be traced back to each concept.

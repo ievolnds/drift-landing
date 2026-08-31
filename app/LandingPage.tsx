@@ -10,13 +10,45 @@ const ASSET_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 type Store = "apple" | "google";
 
+type TrackingValue = string | undefined;
+
+type DriftWindow = typeof window & {
+  dataLayer?: Array<Record<string, TrackingValue>>;
+  fbq?: (
+    action: "trackCustom",
+    eventName: "StoreClick",
+    parameters: Record<string, TrackingValue>,
+  ) => void;
+};
+
+const ATTRIBUTION_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+] as const;
+
+function getAttribution() {
+  const search = new URLSearchParams(window.location.search);
+
+  return Object.fromEntries(
+    ATTRIBUTION_KEYS.map((key) => [key, search.get(key) ?? undefined]),
+  );
+}
+
 function trackStoreClick(store: Store, placement: string) {
-  const detail = { event: "store_click", store, placement };
+  const detail = {
+    event: "store_click",
+    store,
+    placement,
+    page_path: window.location.pathname,
+    ...getAttribution(),
+  };
   window.dispatchEvent(new CustomEvent("drift:store-click", { detail }));
-  const dataLayer = (
-    window as typeof window & { dataLayer?: Array<Record<string, string>> }
-  ).dataLayer;
-  dataLayer?.push(detail);
+  const driftWindow = window as DriftWindow;
+  driftWindow.dataLayer?.push(detail);
+  driftWindow.fbq?.("trackCustom", "StoreClick", detail);
 }
 
 function StoreLink({

@@ -1,6 +1,8 @@
 # drift US landing page
 
-The mobile-first acquisition site for drift. It introduces the product in English, sends visitors to the live iOS and Android store listings, and exposes a lightweight `store_click` event hook for future Meta Pixel wiring.
+The mobile-first acquisition site for drift. It introduces the product in English and sends visitors to the live iOS and Android store listings.
+
+Meta Pixel `1807919130381082` records a `PageView` on entry and a custom `StoreClick` event from every App Store and Google Play button. `StoreClick` includes the store, button placement, page path, and available UTM fields; it does not rely on the Meta App SDK.
 
 ## Local development
 
@@ -18,7 +20,7 @@ npm run lint
 npm test
 ```
 
-`npm test` runs the public static build and checks the rendered landing page, store links, mobile treatment, reduced-motion support, event hook, and campaign asset set.
+`npm test` runs the public static build and checks the rendered landing page, store links, mobile treatment, reduced-motion support, Pixel wiring, event hook, and campaign asset set.
 
 ## Campaign assets
 
