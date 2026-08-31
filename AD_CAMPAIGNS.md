@@ -79,13 +79,13 @@ Download
 The city feels different when someone notices the same small things you do. See it through people with a sensibility like yours, and let one honest moment become a conversation.
 
 **Headline**  
-Someone in your city noticed it too.
+Same city. Similar sensibility.
 
 **On-image hook**
-Someone in your city noticed it too.
+Same city. Similar sensibility.
 
 **Description**  
-See your city differently.
+Meet people through taste.
 
 **CTA**  
 Download

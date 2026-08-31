@@ -24,8 +24,8 @@ const ads = [
   {
     source: "after-rain.webp",
     output: "ad-03-same-city.png",
-    headline: ["Someone nearby", "noticed it too."],
-    subline: "See your city differently.",
+    headline: ["Same city.", "Similar sensibility."],
+    subline: "Meet people through taste.",
     position: "centre",
   },
   {

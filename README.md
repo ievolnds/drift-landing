@@ -26,6 +26,8 @@ npm test
 
 The four Meta-ready 4:5 creatives are in `public/ads/`. Final English copy, audience rationale, and a recommended first-city test structure are documented in `AD_CAMPAIGNS.md`.
 
+The daily website-first measurement and decision rules are documented in `GROWTH_OPERATIONS.md`.
+
 ## Production
 
 The public site is deployed from the `gh-pages` branch of the public `ievolnds/drift-landing` repository:
