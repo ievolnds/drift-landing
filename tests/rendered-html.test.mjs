@@ -8,10 +8,12 @@ test("adds real app galleries to both languages without removing the original sc
   const files = ["01-post-reactions", "02-camera-bookstore", "03-now-playing", "04-encounter", "05-profile", "06-sticker", "07-chat", "08-reaction"];
   for (const route of ["index.html", "zh-tw/index.html"]) {
     const html = await readOut(route);
+    const folder = route.startsWith("zh-tw") ? "app-screens/zh-tw" : "app-screens";
     assert.equal((html.match(/class="app-screens"/g) ?? []).length, 3);
     for (const file of files) {
-      assert.ok(html.includes(`/app-screens/${file}.webp`));
-      await access(new URL(`../public/app-screens/${file}.webp`, import.meta.url));
+      assert.ok(html.includes(`/${folder}/${file}.webp`));
+      await access(new URL(`../public/${folder}/${file}.webp`, import.meta.url));
+      if (route.startsWith("zh-tw")) assert.ok(!html.includes(`/app-screens/${file}.webp`), "繁中頁不可回退到英文截圖");
     }
     for (const scene of ["after-rain", "bookstore", "laundromat", "cinema"]) {
       assert.ok(html.includes(`/scenes/${scene}.webp`));
@@ -22,7 +24,9 @@ test("adds real app galleries to both languages without removing the original sc
   const en = await readOut("index.html");
   const zh = await readOut("zh-tw/index.html");
   assert.match(en, /Actual iOS screens from our App Store gallery/);
-  assert.match(zh, /iOS 英文版實際畫面；App 支援繁體中文/);
+  assert.match(zh, /iOS 繁中介面・示範內容/);
+  assert.doesNotMatch(zh, /英文版實際畫面/);
+  assert.doesNotMatch(en, /app-screens\/zh-tw\//);
   assert.match(zh, /左右滑動，點圖放大/);
   const component = await readApp("AppScreens.tsx");
   assert.match(component, /showModal/);

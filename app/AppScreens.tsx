@@ -44,8 +44,9 @@ export function AppScreens({ group, locale }: { group: Group; locale: Locale }) 
   const [selected, setSelected] = useState<number | null>(null);
   const [active, setActive] = useState(0);
   const items = config.ids.map((id) => screens[id]);
+  const imageBase = `${ASSET_PREFIX}/app-screens${zh ? "/zh-tw" : ""}`;
   const note = zh
-    ? "取自 App Store 的 iOS 英文版實際畫面；App 支援繁體中文。"
+    ? "iOS 繁中介面・示範內容。"
     : "Actual iOS screens from our App Store gallery.";
 
   useEffect(() => {
@@ -101,7 +102,7 @@ export function AppScreens({ group, locale }: { group: Group; locale: Locale }) 
                   opener.current = event.currentTarget;
                   setSelected(index);
                 }}>
-                  <img src={`${ASSET_PREFIX}/app-screens/${screen.file}.webp`} alt={caption} width={1320} height={2868} loading="lazy" decoding="async" />
+                  <img src={`${imageBase}/${screen.file}.webp`} alt={caption} width={1320} height={2868} loading="lazy" decoding="async" />
                 </button>
                 <figcaption><span>{String(index + 1).padStart(2, "0")}</span>{caption}</figcaption>
               </figure>
@@ -116,7 +117,7 @@ export function AppScreens({ group, locale }: { group: Group; locale: Locale }) 
               <p>{items[selected][zh ? "zh" : "en"]}</p>
               <button type="button" autoFocus onClick={() => setSelected(null)}>{zh ? "關閉" : "Close"} ×</button>
             </div>
-            <img src={`${ASSET_PREFIX}/app-screens/${items[selected].file}.webp`} alt={items[selected][zh ? "zh" : "en"]} width={1320} height={2868} />
+            <img src={`${imageBase}/${items[selected].file}.webp`} alt={items[selected][zh ? "zh" : "en"]} width={1320} height={2868} />
             <p className="screen-dialog__note">{note}</p>
           </div>
         </dialog>

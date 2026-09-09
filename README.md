@@ -57,4 +57,6 @@ The public site is deployed from the `gh-pages` branch of the public `ievolnds/d
 
 八張來源為已製作的 `store-assets/us/apple/iphone-6.9/*.png`，不是新生成的 UI。`public/app-screens/*.webp` 只作無損格式轉換；1320×2868 原尺寸與解碼後像素逐一比對一致，不裁切、不變造畫面。延遲載入，不拖慢原首屏圖片與下載鈕。
 
-本批原圖為 iOS 英文版。繁中頁的新增文案／操作均為繁體中文，並明示畫面語系與 App 支援繁體中文；沒有以重繪假文字冒充繁中實機截圖，也沒有把 iOS 圖標示成 Android 畫面。這次只部署網站，不改 App 或商店素材。
+英文頁保留原本八張 iOS 商店素材。繁中頁獨立使用 `public/app-screens/zh-tw/*.webp`，不設英文圖 fallback；放大視窗也使用同語系路徑。
+
+繁中素材於 2026-09-09 以原 App 的正式元件、繁中 i18n、離線示範資料在 iOS 模擬器重新渲染，原始畫面 1206×2622，再由 Goldie 排成 1320×2868 海報。照片沿用已核可的夜間街景與書店素材；相機感光輸入與音樂播放進度為隔離示範狀態，不讀寫正式用戶資料。月亮星星由觸控在原貼圖畫布繪製。保留 App 原有固定英文品牌用語（如 say hi、resonates、Undo、相機標語），不重畫或竄改 UI。網站註明「iOS 繁中介面・示範內容」。此批只部署網站，不送商店審核或 App OTA。
