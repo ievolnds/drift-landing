@@ -3,9 +3,14 @@
 
 import Script from "next/script";
 
+import type { Locale } from "./site";
+
 export const META_PIXEL_ID = "1807919130381082";
 
-const baseCode = `
+// 沿用既有的 Pixel 與既有的 PageView 事件，只多帶一個 locale 參數，
+// 讓 en 與 zh-TW 兩頁的成效可以分開看。
+// ⛔ 不換 Pixel ID、不加任何新的 SDK 或追蹤供應商。
+const baseCode = (locale: Locale) => `
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -15,14 +20,14 @@ const baseCode = `
   s.parentNode.insertBefore(t,s)}(window,document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','${META_PIXEL_ID}');
-  fbq('track','PageView');
+  fbq('track','PageView',{locale:'${locale}'});
 `;
 
-export function MetaPixel() {
+export function MetaPixel({ locale }: { locale: Locale }) {
   return (
     <>
       <Script id="meta-pixel" strategy="afterInteractive">
-        {baseCode}
+        {baseCode(locale)}
       </Script>
       <noscript>
         <img
@@ -30,7 +35,7 @@ export function MetaPixel() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&cd[locale]=${locale}&noscript=1`}
         />
       </noscript>
     </>

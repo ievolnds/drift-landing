@@ -1,181 +1,29 @@
 /* eslint-disable @next/next/no-img-element -- pre-optimized editorial WebP assets are rendered directly */
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-
-const APP_STORE_URL = "https://apps.apple.com/us/app/drift-dting/id6788133398";
-const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.howard.drift&hl=en_US&gl=US";
-const ASSET_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-type Store = "apple" | "google";
-
-type TrackingValue = string | undefined;
-
-type DriftWindow = typeof window & {
-  dataLayer?: Array<Record<string, TrackingValue>>;
-  fbq?: (
-    action: "trackCustom",
-    eventName: "StoreClick",
-    parameters: Record<string, TrackingValue>,
-  ) => void;
-};
-
-const ATTRIBUTION_KEYS = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_content",
-  "utm_term",
-] as const;
-
-function getAttribution() {
-  const search = new URLSearchParams(window.location.search);
-
-  return Object.fromEntries(
-    ATTRIBUTION_KEYS.map((key) => [key, search.get(key) ?? undefined]),
-  );
-}
-
-function trackStoreClick(store: Store, placement: string) {
-  const detail = {
-    event: "store_click",
-    store,
-    placement,
-    page_path: window.location.pathname,
-    ...getAttribution(),
-  };
-  window.dispatchEvent(new CustomEvent("drift:store-click", { detail }));
-  const driftWindow = window as DriftWindow;
-  driftWindow.dataLayer?.push(detail);
-  driftWindow.fbq?.("trackCustom", "StoreClick", detail);
-}
-
-function StoreLink({
-  store,
-  placement,
-}: {
-  store: Store;
-  placement: string;
-}) {
-  const apple = store === "apple";
-  const label = apple ? "Download on the App Store" : "Get it on Google Play";
-
-  return (
-    <a
-      className={`store-badge store-badge--${store}`}
-      href={apple ? APP_STORE_URL : PLAY_STORE_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={() => trackStoreClick(store, placement)}
-      aria-label={label}
-    >
-      <img
-        src={`${ASSET_PREFIX}/store-badges/${apple ? "app-store.svg" : "google-play.png"}`}
-        alt={label}
-      />
-    </a>
-  );
-}
-
-function Brand({ dark = false }: { dark?: boolean }) {
-  return (
-    <span className={`brand${dark ? " brand--dark" : ""}`} aria-label="drift">
-      drift<span>.</span>
-    </span>
-  );
-}
-
-function Scene({
-  image,
-  alt,
-  eyebrow,
-  title,
-  copy,
-  align = "left",
-  position = "center",
-}: {
-  image: string;
-  alt: string;
-  eyebrow: string;
-  title: ReactNode;
-  copy: string;
-  align?: "left" | "right";
-  position?: string;
-}) {
-  return (
-    <section className={`scene scene--${align}`} data-scene>
-      <img
-        className="scene__image"
-        src={image}
-        alt={alt}
-        loading="lazy"
-        style={{ objectPosition: position }}
-      />
-      <div className="scene__veil" />
-      <div className="scene__number" aria-hidden="true" />
-      <div className="scene__copy" data-reveal>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
-        <p className="scene__body">{copy}</p>
-      </div>
-    </section>
-  );
-}
+import { LangSwitch } from "./LangSwitch";
+import { Brand, Scene } from "./Sections";
+import { ASSET_PREFIX } from "./site";
+import { StoreLink } from "./StoreLink";
+import { useReveal } from "./useReveal";
 
 export function LandingPage() {
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealNodes = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-reveal], [data-scene]"),
-    );
-
-    if (reducedMotion || typeof window.IntersectionObserver === "undefined") {
-      revealNodes.forEach((node) => node.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8%" },
-    );
-
-    document.documentElement.classList.add("motion-ready");
-    revealNodes.forEach((node) => observer.observe(node));
-
-    let frame = 0;
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        document.documentElement.style.setProperty("--scroll-y", `${window.scrollY}px`);
-        frame = 0;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      document.documentElement.classList.remove("motion-ready");
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
+  useReveal();
 
   return (
     <main id="top">
       <nav className="nav" aria-label="Primary navigation">
         <a href="#top" className="nav__brand"><Brand /></a>
         <a href="#what-is-drift" className="nav__about">What is drift?</a>
-        <a
-          className="nav__cta"
-          href="#download"
-        >
-          Get drift <span>↓</span>
-        </a>
+        <div className="nav__end">
+          <LangSwitch current="en" />
+          <a
+            className="nav__cta"
+            href="#download"
+          >
+            Get drift <span>↓</span>
+          </a>
+        </div>
       </nav>
 
       <section className="hero">
@@ -196,8 +44,8 @@ export function LandingPage() {
             small details that make a city feel like yours.
           </p>
           <div className="store-row store-row--hero">
-            <StoreLink store="apple" placement="hero" />
-            <StoreLink store="google" placement="hero" />
+            <StoreLink store="apple" placement="hero" locale="en" />
+            <StoreLink store="google" placement="hero" locale="en" />
           </div>
         </div>
         <a className="hero__scroll" href="#what-is-drift">
@@ -318,8 +166,8 @@ export function LandingPage() {
           <h2>Your city already has<br />your kind of people.</h2>
           <p>You just have to notice each other.</p>
           <div className="store-row store-row--final">
-            <StoreLink store="apple" placement="final" />
-            <StoreLink store="google" placement="final" />
+            <StoreLink store="apple" placement="final" locale="en" />
+            <StoreLink store="google" placement="final" locale="en" />
           </div>
         </div>
       </section>
