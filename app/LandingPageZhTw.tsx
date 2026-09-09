@@ -2,6 +2,7 @@
 "use client";
 
 import { LangSwitch } from "./LangSwitch";
+import { AppScreens } from "./AppScreens";
 import { Brand, Scene } from "./Sections";
 import { ASSET_PREFIX } from "./site";
 import { StoreLink } from "./StoreLink";
@@ -86,6 +87,8 @@ export function LandingPageZhTw() {
         position="58% center"
       />
 
+      <AppScreens group="moments" locale="zh-TW" />
+
       <section className="interlude interlude--dark">
         <div className="interlude__label">從哪裡開始</div>
         <div className="interlude__words" data-reveal>
@@ -147,6 +150,8 @@ export function LandingPageZhTw() {
         position="center center"
       />
 
+      <AppScreens group="character" locale="zh-TW" />
+
       <section className="human-grid">
         <div className="human-grid__photo human-grid__photo--laundromat" data-reveal>
           <img
@@ -165,6 +170,8 @@ export function LandingPageZhTw() {
           <blockquote>「喜歡的事讓人好奇，彼此同意才讓它繼續。」</blockquote>
         </div>
       </section>
+
+      <AppScreens group="conversation" locale="zh-TW" />
 
       <section className="final-scene" id="download">
         <img

@@ -49,4 +49,12 @@ The public site is deployed from the `gh-pages` branch of the public `ievolnds/d
 
 `https://ievolnds.github.io/drift-landing/`
 
-`vercel.json` is retained as an optional path for a future Vercel custom-domain deployment.
+目前正式入口為 `https://drift-landing-ten.vercel.app/` 與 `/zh-tw`，由 `main` 觸發原 Vercel 專案部署；上方 GitHub Pages 為既有相容出口，不是本輪主要交付網址。
+
+## 網站中的真實 App 畫面
+
+2026-09-09 依 Howard 要求新增，不取代既有人物場景、功能段落或下載按鈕。`AppScreens.tsx` 在兩語系中穿插三組：日常（貼文／相機／音樂）、相識（交會／個人頁）、對話（手繪貼圖／聊天室／自訂反應）。每組可左右滑動、按箭頭與點圖放大；放大使用原生 dialog，支援 Esc 關閉及焦點返回。
+
+八張來源為已製作的 `store-assets/us/apple/iphone-6.9/*.png`，不是新生成的 UI。`public/app-screens/*.webp` 只作無損格式轉換；1320×2868 原尺寸與解碼後像素逐一比對一致，不裁切、不變造畫面。延遲載入，不拖慢原首屏圖片與下載鈕。
+
+本批原圖為 iOS 英文版。繁中頁的新增文案／操作均為繁體中文，並明示畫面語系與 App 支援繁體中文；沒有以重繪假文字冒充繁中實機截圖，也沒有把 iOS 圖標示成 Android 畫面。這次只部署網站，不改 App 或商店素材。

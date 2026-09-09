@@ -2,6 +2,7 @@
 "use client";
 
 import { LangSwitch } from "./LangSwitch";
+import { AppScreens } from "./AppScreens";
 import { Brand, Scene } from "./Sections";
 import { ASSET_PREFIX } from "./site";
 import { StoreLink } from "./StoreLink";
@@ -76,6 +77,8 @@ export function LandingPage() {
         position="58% center"
       />
 
+      <AppScreens group="moments" locale="en" />
+
       <section className="interlude interlude--dark">
         <div className="interlude__label">HOW IT STARTS</div>
         <div className="interlude__words" data-reveal>
@@ -133,6 +136,8 @@ export function LandingPage() {
         position="center center"
       />
 
+      <AppScreens group="character" locale="en" />
+
       <section className="human-grid">
         <div className="human-grid__photo human-grid__photo--laundromat" data-reveal>
           <img
@@ -151,6 +156,8 @@ export function LandingPage() {
           <blockquote>“Taste creates curiosity. Mutual choice lets it continue.”</blockquote>
         </div>
       </section>
+
+      <AppScreens group="conversation" locale="en" />
 
       <section className="final-scene" id="download">
         <img

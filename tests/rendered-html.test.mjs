@@ -4,6 +4,33 @@ import test from "node:test";
 
 const CJK = /[㐀-鿿]/;
 
+test("adds real app galleries to both languages without removing the original scenes", async () => {
+  const files = ["01-post-reactions", "02-camera-bookstore", "03-now-playing", "04-encounter", "05-profile", "06-sticker", "07-chat", "08-reaction"];
+  for (const route of ["index.html", "zh-tw/index.html"]) {
+    const html = await readOut(route);
+    assert.equal((html.match(/class="app-screens"/g) ?? []).length, 3);
+    for (const file of files) {
+      assert.ok(html.includes(`/app-screens/${file}.webp`));
+      await access(new URL(`../public/app-screens/${file}.webp`, import.meta.url));
+    }
+    for (const scene of ["after-rain", "bookstore", "laundromat", "cinema"]) {
+      assert.ok(html.includes(`/scenes/${scene}.webp`));
+    }
+    assert.equal((html.match(/class="store-badge store-badge--/g) ?? []).length, 4);
+    assert.match(html, /width="1320" height="2868" loading="lazy"/);
+  }
+  const en = await readOut("index.html");
+  const zh = await readOut("zh-tw/index.html");
+  assert.match(en, /Actual iOS screens from our App Store gallery/);
+  assert.match(zh, /iOS 英文版實際畫面；App 支援繁體中文/);
+  assert.match(zh, /左右滑動，點圖放大/);
+  const component = await readApp("AppScreens.tsx");
+  assert.match(component, /showModal/);
+  assert.match(component, /onCancel/);
+  assert.match(component, /preventScroll: true/);
+  assert.match(component, /prefers-reduced-motion/);
+});
+
 function readOut(relative) {
   return readFile(new URL(`../out/${relative}`, import.meta.url), "utf8");
 }
