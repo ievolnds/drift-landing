@@ -74,10 +74,14 @@ test("renders the Traditional Chinese landing page at /zh-tw", async () => {
   assert.match(html, /ev=PageView/);
   assert.match(html, /cd\[locale\]=zh-TW/);
 
-  // 重用既有場景照片，沒有假造的 app 畫面
-  assert.match(html, /\/drift-landing\/scenes\/station\.webp/);
+  // 台灣素材獨立，不覆蓋英文照片；沒有假造的 app 畫面
+  assert.match(html, /\/drift-landing\/scenes\/tw\/bookstore\.webp/);
+  assert.match(html, /\/drift-landing\/scenes\/tw\/cafe\.webp/);
   assert.match(html, /\/drift-landing\/scenes\/bookstore\.webp/);
-  assert.match(html, /\/drift-landing\/store-badges\/app-store\.svg/);
+  assert.match(html, /\/drift-landing\/store-badges\/app-store-zh-tw\.svg/);
+  assert.match(html, /\/drift-landing\/store-badges\/google-play-zh-tw\.png/);
+  assert.match(html, /個性表情/);
+  assert.match(html, /會彈跳的小共鳴/);
   assert.doesNotMatch(html, /phone--|screenshot|app-preview/i);
 
   // 首屏（hero，第一個 section）就要有下載鈕。
@@ -108,8 +112,8 @@ test("zh-TW copy stays inside the product's factual and naming limits", async ()
   //    說明 Now 是同一個 region 可見，不是僅限雙向解鎖
   assert.doesNotMatch(html, /只有.{0,8}解鎖.{0,8}看得到|僅.{0,6}解鎖.{0,6}可見/);
 
-  // 定位仍要講清楚「不比距離」
-  assert.match(html, /不比距離。/);
+  // 使用者指定以品味為訴求，不繼續重複距離。
+  assert.doesNotMatch(html, /不比距離/);
   assert.ok(source.includes("statuses.ts"), "文案紅線註解要指回原始碼出處");
 });
 
@@ -202,6 +206,7 @@ test("ships mobile, motion, attribution, and campaign assets", async () => {
     "ad-02-no-performance.png",
     "ad-03-same-city.png",
     "ad-04-mutual-choice.png",
+    "tw",
   ]);
 
   await access(new URL("../public/og.png", import.meta.url));

@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     description: "從日常裡的品味，慢慢認識一個人。",
     images: [
       {
-        url: `${ASSET_PREFIX}/og.png`,
-        width: 1200,
-        height: 630,
+        url: `${ASSET_PREFIX}/ads/tw/taste.png`,
+        width: 1122,
+        height: 1402,
         alt: "drift — 有些人，從喜歡的事就認得出來。",
       },
     ],
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "drift — 有些人，從喜歡的事就認得出來。",
     description: "從日常裡的品味，慢慢認識一個人。",
-    images: [`${ASSET_PREFIX}/og.png`],
+    images: [`${ASSET_PREFIX}/ads/tw/taste.png`],
   },
   icons: {
     icon: `${ASSET_PREFIX}/favicon.svg`,

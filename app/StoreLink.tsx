@@ -64,6 +64,9 @@ export function StoreLink({
 }) {
   const apple = store === "apple";
   const label = STORE_BADGE_LABELS[locale][store];
+  const badge = locale === "zh-TW"
+    ? (apple ? "app-store-zh-tw.svg" : "google-play-zh-tw.png")
+    : (apple ? "app-store.svg" : "google-play.png");
 
   return (
     <a
@@ -75,7 +78,7 @@ export function StoreLink({
       aria-label={label}
     >
       <img
-        src={`${ASSET_PREFIX}/store-badges/${apple ? "app-store.svg" : "google-play.png"}`}
+        src={`${ASSET_PREFIX}/store-badges/${badge}`}
         alt={label}
       />
     </a>

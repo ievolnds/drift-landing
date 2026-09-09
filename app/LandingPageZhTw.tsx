@@ -7,7 +7,7 @@ import { ASSET_PREFIX } from "./site";
 import { StoreLink } from "./StoreLink";
 import { useReveal } from "./useReveal";
 
-// 繁體中文落地頁。視覺與英文頁共用同一套 class 與同一批場景照片。
+// 繁體中文落地頁。沿用英文版版型，台灣素材獨立保存。
 //
 // 文案紅線（全部依當前原始碼查證，不是依舊文件）：
 // ⛔ 不寫「同城」「附近」——feed 全球互通，刻意沒有同城 filter
@@ -40,8 +40,8 @@ export function LandingPageZhTw() {
       <section className="hero">
         <img
           className="hero__image"
-          src={`${ASSET_PREFIX}/scenes/station.webp`}
-          alt="一位女子在夜晚的城市月台上停下腳步"
+          src={`${ASSET_PREFIX}/scenes/tw/bookstore.webp`}
+          alt="兩個人在台灣書店裡，各自翻著喜歡的書"
         />
         <div className="hero__veil" />
         <div className="hero__copy">
@@ -71,17 +71,17 @@ export function LandingPageZhTw() {
           <em>它會出現在你注意到的東西裡。</em>
         </p>
         <div className="statement__aside" data-reveal>
-          <span>不比距離。</span>
-          <span>只看你在意什麼。</span>
+          <span>從一點喜歡。</span>
+          <span>到一點好奇。</span>
         </div>
       </section>
 
       <Scene
-        image={`${ASSET_PREFIX}/scenes/rain-cafe.webp`}
+        image={`${ASSET_PREFIX}/scenes/tw/cafe.webp`}
         alt="一個人坐在被雨打濕的咖啡館窗邊"
         eyebrow="當下 · 一天最多兩篇"
-        title={<>照片只能<br />當下拍。</>}
-        copy="在 drift 裡打開相機拍今天，不能從相簿挑一張修飾過的舊照片。看見的是別人此刻真的注意到了什麼。"
+        title={<>今天的光，<br />今天拍下來。</>}
+        copy="每天最多兩篇照片，都在 drift 裡當下拍攝。不用翻找相簿裡最好的自己，只留下今天讓你停了一下的片刻。"
         align="left"
         position="58% center"
       />
@@ -100,7 +100,7 @@ export function LandingPageZhTw() {
         alt="兩個人同時注意到雨後的城市燈光"
         eyebrow="此刻 · 一小時後消失"
         title={<>一首歌、一個地方、<br />一句沒說完的話。</>}
-        copy="分享你正在聽的歌、待著的地方，或此刻的心情。一小時後自動消失，不會累積成一份需要維護的個人紀錄。"
+        copy="分享正在聽的音樂、待著的地方，或一句此刻的心情。點開歌，聽一小段。狀態一小時後消失，把空間留給下一個當下。"
         align="right"
         position="center center"
       />
@@ -116,8 +116,8 @@ export function LandingPageZhTw() {
         <div className="details__list">
           <article data-reveal>
             <span>01</span>
-            <h3>自訂標籤</h3>
-            <p>自己命名、自己配色的標籤，比一段自介更快說明你是誰。</p>
+            <h3>自訂標籤與個性表情</h3>
+            <p>替喜歡的事命名、配上顏色，再選一個有你的樣子的表情。個人頁不必長篇大論，也能很像你。</p>
           </article>
           <article data-reveal>
             <span>02</span>
@@ -128,6 +128,11 @@ export function LandingPageZhTw() {
             <span>03</span>
             <h3>自訂訊息反應</h3>
             <p>用你自己的字回應一則訊息，不必從既定的表情裡挑一個。</p>
+          </article>
+          <article data-reveal>
+            <span>04</span>
+            <h3>會彈跳的小共鳴</h3>
+            <p>喜歡一篇貼文，就留個反應。小泡泡在照片上彈來彈去，讓一句「我也喜歡」有了自己的樣子。</p>
           </article>
         </div>
       </section>
