@@ -1,6 +1,16 @@
 # drift 台灣廣告素材與投放規格
 
-更新：2026-09-09。這是準備好的素材包，不代表廣告已發布。
+更新：2026-09-10。品味 v1 已提交 Meta，行銷活動已開啟並顯示「檢閱中」；其餘三組仍為備用素材。尚無台灣曝光或安裝歸因證據。
+
+## 本次發布與直式素材
+
+- campaign `52588902730522`、adset `52588902730922`、ad `52588902730722`；沿用原單一活動，不新增付費活動。台灣、所有性別、Advantage+ 建議 25–44 歲，詳細興趣空白。
+- 3 組版位已替換舊英文圖：動態消息／右欄用 `taste.png`，直式用 `public/ads/tw/taste-reels-v1.png`（941×1672）。手機動態消息、Facebook 插播 Reel 預覽的主標／品牌／圖片 CTA 無介面遮擋，未全面驗收其他版位。
+- `/zh-tw`、繁中文案與標題、說明「分享日常，從五句招呼慢慢開始。」、下載 CTA；AI 素材揭露開啟；自動文字／創意強化仍關閉。
+- 固定 UTM：`utm_source=meta&utm_medium=paid_social&utm_campaign=tw_taste_202609&utm_content=taste_v1&utm_term=tw_25_44`。年齡標籤代表建議受眾，非強制界線。
+- 日預算 US$5.70，Meta 顯示日最高 US$9.98，結束仍為 2026-09-11 08:00 Asia/Taipei，未延長。
+- 新直式圖由內建 imagegen 編輯既有 `taste.png`，保留成年女性讀書、背景成年男性及台北雨窗咖啡店。新增直式空間並將字收進安全區；不是程式重繪、不是假 App UI。來源生成檔 `exec-c8e60d9f-3d29-4599-b391-5a6a1e30301e.png`。
+- 生成提示詞摘要：preserve the same people and Taipei rainy café photograph; elegant cream Traditional Chinese type; no text in top 17%, bottom 36%, right 16%; brand at 18%, headline at 23–36%, secondary at 39–41%, CTA at 59–61%. Exact text: drift / 有些人，從喜歡的事就認得出來。 / 從日常品味，慢慢認識一個人。 / 品味交友｜立即下載。最終以實際 Meta 預覽驗證，不以提示詞百分比冒充量測。
 
 ## 頁面與定位
 
